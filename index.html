@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>다회용컵 파일럿 — 링키지랩 × 카카오모빌리티</title>
+<title>다회용컵 파일럿 — 링키지랩 × 카카오</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -12,15 +12,11 @@
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KakaoMedium.woff2') format('woff2');
   font-weight: 500;
 }
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── TOKENS ── */
 :root {
   --yellow: #FFE600;
-  --black:  #1A1A1A;
-  --white:  #FFFFFF;
-  --gray:   #F5F5F5;
-  --gray2:  #E8E8E8;
-  --text:   #1A1A1A;
-  --muted:  #888;
+  --black:  #111111;
   --green:  #1A7A58;
   --green-bg: #EAF5EF;
   --red:    #C0392B;
@@ -28,648 +24,725 @@
   --amber:  #9A6200;
   --amber-bg: #FEF5E4;
   --blue:   #1A4F8A;
-  --blue-bg: #EBF2FB;
-  --font-head: 'KakaoBig', 'Noto Sans KR', sans-serif;
-  --font-body: 'Noto Sans KR', sans-serif;
-  --radius: 16px;
-  --radius-sm: 10px;
-}
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font-body);
-  background: var(--white);
-  color: var(--text);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+  --blue-bg:#EBF2FB;
+  --fh: 'KakaoBig','Noto Sans KR',sans-serif;
+  --fb: 'Noto Sans KR',sans-serif;
+  --r: 14px;
+  --r-sm: 8px;
+  --transition: all .3s cubic-bezier(.4,0,.2,1);
 }
 
-/* ── NAV ── */
+/* ── LIGHT ── */
+[data-theme="light"] {
+  --bg:     #FFFFFF;
+  --bg2:    #F5F5F3;
+  --bg3:    #EDEBE6;
+  --bdr:    #E2DFD8;
+  --text:   #111111;
+  --muted:  #888880;
+  --card:   #FFFFFF;
+  --nav-bg: rgba(255,255,255,0.92);
+  --hero-bg:#111111;
+  --hero-t: #ffffff;
+}
+/* ── DARK ── */
+[data-theme="dark"] {
+  --bg:     #111111;
+  --bg2:    #1A1A1A;
+  --bg3:    #222222;
+  --bdr:    #333333;
+  --text:   #F0EDE6;
+  --muted:  #888880;
+  --card:   #1A1A1A;
+  --nav-bg: rgba(17,17,17,0.92);
+  --hero-bg:#000000;
+  --hero-t: #ffffff;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: var(--fb);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+  transition: background .3s, color .3s;
+}
+
+/* ─────────────────────────────────
+   NAV
+───────────────────────────────── */
 nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--gray2);
-  padding: 0 48px; height: 60px;
+  position: sticky; top:0; z-index:200;
+  background: var(--nav-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: .5px solid var(--bdr);
+  height: 60px; padding: 0 40px;
   display: flex; align-items: center; justify-content: space-between;
+  transition: var(--transition);
 }
 .nav-logo {
-  font-family: var(--font-head);
-  font-size: 16px; font-weight: 700;
-  display: flex; align-items: center; gap: 8px;
+  font-family: var(--fh); font-size: 15px; font-weight: 700;
+  color: var(--text); display:flex; align-items:center; gap:8px;
+  text-decoration: none;
 }
 .nav-badge {
   background: var(--yellow); color: var(--black);
-  padding: 3px 10px; border-radius: 6px;
-  font-size: 12px; font-weight: 700;
+  font-size: 11px; font-weight: 700;
+  padding: 3px 9px; border-radius: 6px;
 }
+.nav-right { display:flex; align-items:center; gap:10px; }
+
+/* 섹션 바로가기 버튼 */
+.nav-jumps { display:flex; gap:6px; }
+.nav-jump {
+  font-size: 11px; font-weight: 500;
+  color: var(--muted); text-decoration:none;
+  padding: 5px 12px; border-radius: 20px;
+  border: .5px solid var(--bdr);
+  background: var(--bg2);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.nav-jump:hover { color: var(--text); border-color: var(--text); }
+
+/* 다크모드 토글 */
+.theme-toggle {
+  width: 44px; height: 24px;
+  background: var(--bdr); border-radius: 20px;
+  border: none; cursor: pointer;
+  position: relative; transition: background .3s;
+  flex-shrink: 0;
+}
+[data-theme="dark"] .theme-toggle { background: var(--yellow); }
+.theme-toggle::after {
+  content: '';
+  position: absolute; top: 3px; left: 3px;
+  width: 18px; height: 18px;
+  background: var(--bg); border-radius: 50%;
+  transition: transform .3s, background .3s;
+}
+[data-theme="dark"] .theme-toggle::after {
+  transform: translateX(20px);
+  background: var(--black);
+}
+.toggle-icon {
+  font-size: 11px; position:absolute;
+  top: 50%; transform: translateY(-50%);
+  pointer-events: none;
+}
+.icon-sun { left:5px; }
+.icon-moon { right:5px; }
+
 .nav-rec {
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items:center; gap:6px;
   background: var(--black); color: var(--yellow);
   font-size: 12px; font-weight: 700;
-  padding: 8px 18px; border-radius: 40px;
+  padding: 8px 16px; border-radius: 40px;
   text-decoration: none;
   transition: opacity .2s;
 }
-.nav-rec:hover { opacity: .8; }
+[data-theme="dark"] .nav-rec { background: var(--yellow); color: var(--black); }
+.nav-rec:hover { opacity: .85; }
 .nav-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--yellow);
-  animation: blink 1.5s ease infinite;
+  width:6px; height:6px; border-radius:50%;
+  background: var(--yellow); animation: blink 1.5s ease infinite;
 }
+[data-theme="dark"] .nav-dot { background: var(--black); }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
 
-/* ── HERO ── */
+/* ─────────────────────────────────
+   HERO
+───────────────────────────────── */
 .hero {
-  background: var(--black);
+  background: var(--hero-bg);
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: grid; grid-template-columns: 1fr 1fr;
   align-items: center;
-  padding: 80px 80px 80px 80px;
-  gap: 60px;
+  padding: 80px; gap: 60px;
   position: relative; overflow: hidden;
 }
 .hero::before {
-  content: '';
-  position: absolute; width: 600px; height: 600px;
-  background: var(--yellow); border-radius: 50%;
-  top: -200px; right: -100px; opacity: 0.07;
+  content:'';
+  position:absolute; width:600px; height:600px;
+  background: var(--yellow); border-radius:50%;
+  top:-200px; right:-100px; opacity:.06;
   animation: pulse 6s ease-in-out infinite;
 }
 .hero::after {
-  content: '';
-  position: absolute; width: 300px; height: 300px;
-  background: var(--yellow); border-radius: 50%;
-  bottom: -100px; left: 200px; opacity: 0.05;
+  content:'';
+  position:absolute; width:300px; height:300px;
+  background: var(--yellow); border-radius:50%;
+  bottom:-100px; left:200px; opacity:.04;
   animation: pulse 8s ease-in-out infinite reverse;
 }
 @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
 
-.hero-text { position: relative; z-index: 1; }
+.hero-text { position:relative; z-index:1; }
 .hero-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(255,230,0,0.15);
-  border: 1px solid rgba(255,230,0,0.3);
+  display: inline-flex; align-items:center; gap:6px;
+  background: rgba(255,230,0,.15);
+  border: 1px solid rgba(255,230,0,.3);
   color: var(--yellow);
-  font-size: 12px; font-weight: 500;
-  padding: 6px 14px; border-radius: 40px;
+  font-size: 12px; font-weight:500;
+  padding: 6px 14px; border-radius:40px;
   margin-bottom: 28px;
-  opacity: 0; animation: fadeUp .6s ease .2s forwards;
+  opacity:0; animation: fadeUp .6s ease .2s forwards;
 }
 .hero-badge::before {
-  content: ''; width: 6px; height: 6px;
-  background: var(--yellow); border-radius: 50%;
+  content:''; width:6px; height:6px;
+  background:var(--yellow); border-radius:50%;
   animation: blink 1.5s ease infinite;
 }
 .hero h1 {
-  font-family: var(--font-head);
-  font-size: clamp(36px, 5vw, 56px);
-  font-weight: 700; color: var(--white);
+  font-family: var(--fh);
+  font-size: clamp(36px,5vw,56px);
+  font-weight: 700; color: #fff;
   line-height: 1.15; margin-bottom: 20px;
-  opacity: 0; animation: fadeUp .7s ease .35s forwards;
+  opacity:0; animation: fadeUp .7s ease .35s forwards;
 }
-.hero h1 em { color: var(--yellow); font-style: normal; }
+.hero h1 em { color: var(--yellow); font-style:normal; }
 .hero-desc {
-  font-size: 16px; color: rgba(255,255,255,0.55);
-  line-height: 1.8; font-weight: 300; margin-bottom: 40px;
-  opacity: 0; animation: fadeUp .7s ease .5s forwards;
+  font-size: 16px; color: rgba(255,255,255,.55);
+  line-height: 1.8; font-weight:300; margin-bottom: 40px;
+  opacity:0; animation: fadeUp .7s ease .5s forwards;
 }
 .hero-cta {
-  display: flex; gap: 12px;
-  opacity: 0; animation: fadeUp .7s ease .65s forwards;
+  display:flex; gap:12px;
+  opacity:0; animation: fadeUp .7s ease .65s forwards;
 }
 .btn-primary {
   background: var(--yellow); color: var(--black);
-  font-size: 14px; font-weight: 700;
-  padding: 14px 28px; border-radius: 40px;
-  border: none; cursor: pointer; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 14px; font-weight:700;
+  padding: 14px 28px; border-radius:40px;
+  border:none; cursor:pointer; text-decoration:none;
+  display:inline-flex; align-items:center; gap:6px;
   transition: transform .2s, opacity .2s;
 }
-.btn-primary:hover { transform: translateY(-2px); opacity: .9; }
+.btn-primary:hover { transform: translateY(-2px); opacity:.9; }
 .btn-ghost {
-  background: transparent; color: rgba(255,255,255,0.6);
-  font-size: 14px; font-weight: 400;
-  padding: 14px 24px; border-radius: 40px;
-  border: 1px solid rgba(255,255,255,0.2);
-  cursor: pointer; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 6px;
-  transition: border-color .2s, color .2s, transform .2s;
+  background:transparent; color: rgba(255,255,255,.65);
+  font-size:14px; font-weight:400;
+  padding:14px 24px; border-radius:40px;
+  border:1px solid rgba(255,255,255,.25);
+  cursor:pointer; text-decoration:none;
+  display:inline-flex; align-items:center; gap:6px;
+  transition: var(--transition);
 }
-.btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: var(--white); transform: translateY(-2px); }
-
+.btn-ghost:hover { border-color:rgba(255,255,255,.6); color:#fff; transform:translateY(-2px); }
 .hero-stats {
-  display: flex; gap: 32px; margin-top: 52px;
-  padding-top: 40px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  opacity: 0; animation: fadeUp .7s ease .8s forwards;
-  flex-wrap: wrap;
+  display:flex; gap:32px; margin-top:52px;
+  padding-top:40px;
+  border-top:1px solid rgba(255,255,255,.1);
+  opacity:0; animation: fadeUp .7s ease .8s forwards;
+  flex-wrap:wrap;
 }
-.stat { display: flex; flex-direction: column; gap: 4px; }
-.stat-val {
-  font-family: var(--font-head); font-size: 28px;
-  font-weight: 700; color: var(--yellow);
-}
-.stat-lbl { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 300; }
+.stat { display:flex; flex-direction:column; gap:4px; }
+.stat-val { font-family:var(--fh); font-size:28px; font-weight:700; color:var(--yellow); }
+.stat-lbl { font-size:12px; color:rgba(255,255,255,.4); font-weight:300; }
 
-/* ── HERO RIGHT: RECOMMEND CARD ── */
+/* 히어로 오른쪽: 추천 카드 */
 .hero-right {
-  position: relative; z-index: 1;
-  opacity: 0; animation: fadeLeft .8s ease .4s forwards;
+  position:relative; z-index:1;
+  opacity:0; animation: fadeLeft .8s ease .4s forwards;
 }
-@keyframes fadeLeft {
-  from { opacity: 0; transform: translateX(40px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
+@keyframes fadeLeft { from{opacity:0;transform:translateX(40px)} to{opacity:1;transform:translateX(0)} }
 .rec-card {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius);
-  padding: 32px;
-  display: flex; flex-direction: column; gap: 20px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: var(--r); padding:32px;
+  display:flex; flex-direction:column; gap:20px;
 }
-.rec-card-header {
-  display: flex; align-items: center; justify-content: space-between;
-}
-.rec-label {
-  font-size: 11px; font-weight: 700; letter-spacing: .1em;
-  text-transform: uppercase; color: rgba(255,255,255,0.4);
-}
+.rec-card-hdr { display:flex; align-items:center; justify-content:space-between; }
+.rec-label { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.4); }
 .rec-badge-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(255,230,0,.15);
-  border: .5px solid rgba(255,230,0,.35);
-  color: var(--yellow); font-size: 10px; font-weight: 700;
-  padding: 4px 12px; border-radius: 20px;
+  display:inline-flex; align-items:center; gap:6px;
+  background: rgba(255,230,0,.15); border:.5px solid rgba(255,230,0,.35);
+  color:var(--yellow); font-size:10px; font-weight:700;
+  padding:4px 12px; border-radius:20px;
 }
-.rec-name {
-  font-family: var(--font-head); font-size: 36px;
-  font-weight: 700; color: var(--white); line-height: 1.1;
-}
-.rec-name em { color: var(--yellow); font-style: normal; }
-.rec-price-wrap { display: flex; flex-direction: column; gap: 4px; }
-.rec-price-lbl { font-size: 11px; color: rgba(255,255,255,0.35); }
-.rec-price {
-  font-family: var(--font-head); font-size: 44px;
-  font-weight: 700; color: var(--yellow);
-}
-.rec-price-sub { font-size: 12px; color: rgba(255,255,255,0.3); }
-.rec-pills { display: flex; flex-direction: column; gap: 8px; }
+.rec-name { font-family:var(--fh); font-size:36px; font-weight:700; color:#fff; line-height:1.1; }
+.rec-name em { color:var(--yellow); font-style:normal; }
+.rec-price-wrap { display:flex; flex-direction:column; gap:4px; }
+.rec-price-lbl { font-size:11px; color:rgba(255,255,255,.35); }
+.rec-price { font-family:var(--fh); font-size:34px; font-weight:700; color:var(--yellow); }
+.rec-price-sub { font-size:12px; color:rgba(255,255,255,.3); }
+.rec-pills { display:flex; flex-direction:column; gap:8px; }
 .rec-pill {
-  background: rgba(255,255,255,0.06);
-  border: .5px solid rgba(255,255,255,0.1);
-  border-radius: 40px; padding: 7px 16px;
-  font-size: 12px; color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,.06); border:.5px solid rgba(255,255,255,.1);
+  border-radius:40px; padding:7px 16px;
+  font-size:12px; color:rgba(255,255,255,.65);
 }
-.rec-pill b { color: var(--yellow); font-weight: 500; }
+.rec-pill b { color:var(--yellow); font-weight:500; }
 
-/* ── SECTION COMMON ── */
+/* ─────────────────────────────────
+   SECTION COMMON
+───────────────────────────────── */
 section { padding: 100px 80px; }
-.section-tag {
-  font-size: 11px; font-weight: 700; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--muted);
-  margin-bottom: 10px;
+.sec-tag {
+  font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:10px;
 }
-.section-title {
-  font-family: var(--font-head);
-  font-size: clamp(28px, 3.5vw, 42px);
-  font-weight: 700; color: var(--text);
-  line-height: 1.2; margin-bottom: 16px;
+.sec-title {
+  font-family: var(--fh);
+  font-size: clamp(26px,3.5vw,40px);
+  font-weight:700; color:var(--text);
+  line-height:1.2; margin-bottom:14px;
 }
-.section-desc {
-  font-size: 16px; color: var(--muted);
-  line-height: 1.8; font-weight: 300;
-  max-width: 560px; margin-bottom: 60px;
+.sec-desc {
+  font-size:16px; color:var(--muted);
+  line-height:1.8; font-weight:300; max-width:560px; margin-bottom:52px;
 }
 
-/* ── SPOT GRID ── */
-#spots { background: var(--gray); }
+/* ─────────────────────────────────
+   SPOTS
+───────────────────────────────── */
+#spots { background: var(--bg2); }
 .spots-grid {
-  display: grid; grid-template-columns: repeat(6,1fr);
-  gap: 10px; margin-top: 0;
+  display:grid; grid-template-columns:repeat(6,1fr); gap:10px;
 }
 .spot-card {
-  background: var(--white);
-  border-radius: var(--radius-sm);
-  padding: 18px 12px; text-align: center;
-  border: 1px solid var(--gray2);
-  transition: transform .2s;
-  opacity: 0; transform: translateY(20px);
+  background: var(--card); border-radius:var(--r-sm);
+  padding:18px 12px; text-align:center;
+  border:.5px solid var(--bdr);
+  opacity:0; transform:translateY(20px);
   transition: opacity .4s ease, transform .4s ease;
 }
-.spot-card.visible { opacity: 1; transform: translateY(0); }
-.spot-card:hover { transform: translateY(-4px) !important; }
-.spot-floor {
-  font-family: var(--font-head); font-size: 22px;
-  font-weight: 700; line-height: 1; margin-bottom: 4px;
-}
-.spot-floor span { font-size: 12px; font-weight: 400; color: var(--muted); }
-.spot-char { font-size: 11px; color: var(--muted); margin-bottom: 5px; }
-.spot-qty { font-size: 10px; font-weight: 500; }
-
-/* ── METRICS ── */
+.spot-card.visible { opacity:1; transform:translateY(0); }
+.spot-card:hover { transform:translateY(-4px) !important; box-shadow:0 8px 24px rgba(0,0,0,.08); }
+.spot-floor { font-family:var(--fh); font-size:22px; font-weight:700; line-height:1; margin-bottom:4px; color:var(--text); }
+.spot-floor span { font-size:12px; font-weight:400; color:var(--muted); }
+.spot-char { font-size:11px; color:var(--muted); margin-bottom:5px; }
+.spot-qty { font-size:10px; font-weight:500; color:var(--text); }
 .metrics {
-  display: grid; grid-template-columns: repeat(4,1fr);
-  gap: 14px; margin-top: 40px;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:36px;
 }
 .metric {
-  background: var(--white);
-  border: 1px solid var(--gray2); border-radius: var(--radius);
-  padding: 24px 20px;
-  opacity: 0; transform: translateY(20px);
+  background:var(--card); border:.5px solid var(--bdr); border-radius:var(--r); padding:22px 18px;
+  opacity:0; transform:translateY(20px);
   transition: opacity .4s ease, transform .4s ease;
 }
-.metric.visible { opacity: 1; transform: translateY(0); }
-.metric:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
-.metric-val {
-  font-family: var(--font-head); font-size: 30px;
-  font-weight: 700; line-height: 1; margin-bottom: 6px;
-}
-.metric-lbl { font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.5; }
+.metric.visible { opacity:1; transform:translateY(0); }
+.metric:hover { transform:translateY(-4px); box-shadow:0 8px 28px rgba(0,0,0,.07); }
+.metric-val { font-family:var(--fh); font-size:28px; font-weight:700; line-height:1; margin-bottom:6px; color:var(--text); }
+.metric-lbl { font-size:12px; color:var(--muted); font-weight:300; line-height:1.5; }
 
-/* ── COMPARE ── */
-#compare { background: var(--white); }
+/* ─────────────────────────────────
+   COMPARE
+───────────────────────────────── */
+#compare { background: var(--bg); }
 .compare-card {
-  background: var(--white);
-  border: 1px solid var(--gray2); border-radius: var(--radius);
-  overflow: hidden;
-  opacity: 0; transform: translateY(20px);
+  background:var(--card); border:.5px solid var(--bdr); border-radius:var(--r); overflow:hidden;
+  opacity:0; transform:translateY(20px);
   transition: opacity .5s ease, transform .5s ease;
 }
-.compare-card.visible { opacity: 1; transform: translateY(0); }
-table { width: 100%; border-collapse: collapse; }
+.compare-card.visible { opacity:1; transform:translateY(0); }
+table { width:100%; border-collapse:collapse; }
 thead th {
-  padding: 16px 24px; font-size: 12px; font-weight: 700;
-  letter-spacing: .04em; border-bottom: 1px solid var(--gray2);
-  text-align: left;
+  padding:14px 20px; font-size:12px; font-weight:700;
+  letter-spacing:.04em; border-bottom:.5px solid var(--bdr); text-align:left;
 }
-thead th:first-child { background: var(--gray); color: var(--muted); width: 18%; }
-.th-wefun { background: #FFF9E6; color: #8A6A00; }
-.th-itgreen { background: #F0F7F3; color: #4A7A60; }
+thead th:first-child { background:var(--bg2); color:var(--muted); width:18%; }
+.th-wefun  { background:#FFF9E6; color:#8A6A00; }
+.th-itgreen { background:#F0F7F3; color:#4A7A60; }
+[data-theme="dark"] .th-wefun  { background: rgba(255,230,0,.12); color: #FFD84A; }
+[data-theme="dark"] .th-itgreen { background: rgba(26,122,88,.2); color: #4BCD97; }
 tbody td {
-  padding: 14px 24px; font-size: 13px;
-  border-bottom: 1px solid var(--gray2);
-  vertical-align: top; line-height: 1.7;
+  padding:13px 20px; font-size:13px;
+  border-bottom:.5px solid var(--bdr);
+  vertical-align:top; line-height:1.7; color:var(--text);
 }
-tbody tr:last-child td { border-bottom: none; }
-tbody tr:hover td { background: rgba(0,0,0,0.015); }
-tbody td:first-child {
-  font-size: 11px; font-weight: 500; color: var(--muted);
-  background: var(--gray); white-space: nowrap;
-}
-.td-wefun { background: #FFFEF7; }
-.td-itgreen { background: #F7FBF8; }
-.price-main {
-  font-family: var(--font-head); font-size: 20px;
-  font-weight: 700; display: block; margin-bottom: 3px;
-}
-.price-note { font-size: 11px; color: var(--muted); }
-.chip {
-  display: inline-block; font-size: 10px; font-weight: 700;
-  padding: 2px 10px; border-radius: 20px; margin: 1px 2px 1px 0;
-}
-.chip-g { background: var(--green-bg); color: var(--green); }
-.chip-r { background: var(--red-bg); color: var(--red); }
-.chip-y { background: var(--amber-bg); color: var(--amber); }
-.chip-b { background: var(--blue-bg); color: var(--blue); }
-.win  { color: var(--green); font-weight: 500; }
-.warn { color: var(--amber); font-weight: 500; }
-.lose { color: var(--red); font-weight: 500; }
+tbody tr:last-child td { border-bottom:none; }
+tbody tr:hover td { background: rgba(0,0,0,.015); }
+[data-theme="dark"] tbody tr:hover td { background: rgba(255,255,255,.03); }
+tbody td:first-child { font-size:11px; font-weight:500; color:var(--muted); background:var(--bg2); white-space:nowrap; }
+.td-wefun  { background:#FFFEF7; }
+.td-itgreen { background:#F7FBF8; }
+[data-theme="dark"] .td-wefun  { background:rgba(255,230,0,.04); }
+[data-theme="dark"] .td-itgreen { background:rgba(26,122,88,.06); }
+.price-main { font-family:var(--fh); font-size:20px; font-weight:700; display:block; margin-bottom:3px; }
+.price-note { font-size:11px; color:var(--muted); }
+.chip { display:inline-block; font-size:10px; font-weight:700; padding:2px 10px; border-radius:20px; margin:1px 2px 1px 0; }
+.chip-g { background:var(--green-bg); color:var(--green); }
+.chip-r { background:var(--red-bg); color:var(--red); }
+.chip-y { background:var(--amber-bg); color:var(--amber); }
+.chip-b { background:var(--blue-bg); color:var(--blue); }
+.win  { color:var(--green); font-weight:500; }
+.warn { color:var(--amber); font-weight:500; }
+.lose { color:var(--red); font-weight:500; }
 
-/* ── SPECS ── */
-#specs { background: var(--gray); }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+/* ─────────────────────────────────
+   SPECS
+───────────────────────────────── */
+#specs { background: var(--bg2); }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 .detail-card {
-  background: var(--white); border: 1px solid var(--gray2);
-  border-radius: var(--radius); overflow: hidden;
-  opacity: 0; transform: translateY(20px);
+  background:var(--card); border:.5px solid var(--bdr); border-radius:var(--r); overflow:hidden;
+  opacity:0; transform:translateY(20px);
   transition: opacity .5s ease, transform .5s ease;
 }
-.detail-card.visible { opacity: 1; transform: translateY(0); }
-.detail-card:nth-child(2).visible { transition-delay: .15s; }
-.detail-card-header {
-  padding: 18px 22px 14px;
-  border-bottom: 1px solid var(--gray2);
-  display: flex; align-items: center; gap: 12px;
-}
-.detail-icon {
-  width: 36px; height: 36px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; flex-shrink: 0;
-}
-.detail-card-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; }
-.detail-card-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
-.detail-row {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  padding: 11px 22px; border-bottom: 1px solid var(--gray2);
-  font-size: 13px; gap: 12px;
-}
-.detail-row:last-child { border-bottom: none; }
-.detail-row .k { color: var(--muted); font-weight: 300; flex-shrink: 0; padding-top: 1px; }
-.detail-row .v { font-weight: 500; text-align: right; line-height: 1.5; }
+.detail-card.visible { opacity:1; transform:translateY(0); }
+.detail-card:nth-child(2).visible { transition-delay:.12s; }
+.detail-card-header { padding:16px 20px 13px; border-bottom:.5px solid var(--bdr); display:flex; align-items:center; gap:12px; }
+.detail-icon { width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+.detail-card-title { font-family:var(--fh); font-size:14px; font-weight:700; color:var(--text); }
+.detail-card-sub { font-size:11px; color:var(--muted); margin-top:3px; }
+.detail-row { display:flex; justify-content:space-between; align-items:flex-start; padding:10px 20px; border-bottom:.5px solid var(--bdr); font-size:13px; gap:12px; }
+.detail-row:last-child { border-bottom:none; }
+.detail-row .k { color:var(--muted); font-weight:300; flex-shrink:0; padding-top:1px; }
+.detail-row .v { font-weight:500; text-align:right; line-height:1.5; color:var(--text); }
 
-/* ── COST ── */
-#cost { background: var(--white); }
-.cost-layout {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
-  align-items: start;
-}
+/* ─────────────────────────────────
+   COST — 04 Pricing (핵심 개선)
+───────────────────────────────── */
+#cost { background: var(--bg); }
+.cost-layout { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+
+/* 왼쪽: 잇그린 비용 목록 */
 .cost-item {
-  display: flex; gap: 16px; padding: 20px;
-  background: var(--gray); border-radius: var(--radius-sm);
-  margin-bottom: 12px; align-items: flex-start;
-  opacity: 0; transform: translateX(-20px);
+  display:flex; gap:16px; padding:18px 20px;
+  background:var(--bg2); border-radius:var(--r-sm);
+  margin-bottom:10px; align-items:flex-start;
+  border:.5px solid var(--bdr);
+  opacity:0; transform:translateX(-20px);
   transition: opacity .5s ease, transform .5s ease;
 }
-.cost-item.visible { opacity: 1; transform: translateX(0); }
-.cost-item:nth-child(2).visible { transition-delay: .15s; }
-.cost-item:nth-child(3).visible { transition-delay: .3s; }
+.cost-item.visible { opacity:1; transform:translateX(0); }
 .cost-num {
-  width: 32px; height: 32px; background: var(--black);
-  color: var(--yellow); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 700; flex-shrink: 0;
+  width:30px; height:30px; background:var(--black); color:var(--yellow);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; flex-shrink:0;
 }
-.cost-info { flex: 1; }
-.cost-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
-.cost-desc { font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.6; }
-.cost-val {
-  font-family: var(--font-head); font-size: 18px;
-  font-weight: 700; white-space: nowrap; text-align: right;
-}
+[data-theme="dark"] .cost-num { background:var(--yellow); color:var(--black); }
+.cost-info { flex:1; }
+.cost-name { font-size:14px; font-weight:500; margin-bottom:3px; color:var(--text); }
+.cost-desc { font-size:12px; color:var(--muted); font-weight:300; line-height:1.6; }
+.cost-val { font-family:var(--fh); font-size:17px; font-weight:700; white-space:nowrap; text-align:right; color:var(--text); }
 .total-box {
-  background: var(--black); border-radius: var(--radius);
-  padding: 32px; margin-top: 8px;
-  opacity: 0; transform: translateY(20px);
+  background:var(--black); border-radius:var(--r); padding:28px; margin-top:8px;
+  opacity:0; transform:translateY(20px);
   transition: opacity .5s ease .45s, transform .5s ease .45s;
 }
-.total-box.visible { opacity: 1; transform: translateY(0); }
-.total-label { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 8px; font-weight: 300; }
-.total-val {
-  font-family: var(--font-head); font-size: 36px;
-  font-weight: 700; color: var(--yellow);
-}
-.total-note { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 8px; font-weight: 300; }
-.total-note em { color: #FF6B6B; font-style: normal; }
+[data-theme="dark"] .total-box { background:rgba(255,255,255,.06); border:.5px solid var(--bdr); }
+.total-box.visible { opacity:1; transform:translateY(0); }
+.total-label { font-size:13px; color:rgba(255,255,255,.45); margin-bottom:6px; font-weight:300; }
+.total-val { font-family:var(--fh); font-size:34px; font-weight:700; color:var(--yellow); }
+.total-note { font-size:12px; color:rgba(255,255,255,.3); margin-top:8px; font-weight:300; line-height:1.6; }
+.total-note em { color:#FF6B6B; font-style:normal; }
 
-.calc-box {
-  background: var(--gray); border-radius: var(--radius); padding: 28px;
-  opacity: 0; transform: translateX(20px);
+/* 오른쪽: 절감 효과 비교 카드 (핵심 UI) */
+.saving-panel {
+  position:sticky; top:80px;
+  opacity:0; transform:translateX(20px);
   transition: opacity .5s ease .2s, transform .5s ease .2s;
 }
-.calc-box.visible { opacity: 1; transform: translateX(0); }
-.calc-title {
-  font-family: var(--font-head); font-size: 16px;
-  font-weight: 700; margin-bottom: 20px;
-  padding-bottom: 16px; border-bottom: 1px solid var(--gray2);
-}
-.calc-row {
-  display: flex; justify-content: space-between;
-  align-items: center; padding: 8px 0; font-size: 14px;
-}
-.calc-row .k { color: var(--muted); font-weight: 300; }
-.calc-row .v { font-weight: 500; }
-.calc-divider { border: none; border-top: 1px dashed var(--gray2); margin: 8px 0; }
-.calc-row.final .k { font-weight: 500; }
-.calc-row.final .v { font-family: var(--font-head); font-size: 20px; font-weight: 700; }
-.calc-note-box {
-  margin-top: 16px; padding: 20px 22px;
-  background: var(--white); border-radius: var(--radius-sm);
-  border: 1.5px solid var(--yellow);
-}
-.calc-note-box p { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
-.calc-note-item {
-  display: flex; gap: 8px; align-items: flex-start;
-  font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.6; margin-bottom: 6px;
-}
-.calc-note-item span:first-child { color: var(--yellow); font-weight: 700; flex-shrink: 0; }
+.saving-panel.visible { opacity:1; transform:translateX(0); }
 
-/* ── ESG ── */
+/* 비교 카드 */
+.compare-summary {
+  background:var(--card); border:.5px solid var(--bdr); border-radius:var(--r); overflow:hidden; margin-bottom:14px;
+}
+.compare-summary-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 20px; border-bottom:.5px solid var(--bdr);
+  font-size:13px;
+}
+.compare-summary-row:last-child { border-bottom:none; }
+.compare-summary-row .csk { color:var(--muted); font-weight:300; }
+.compare-summary-row .csv { font-weight:600; color:var(--text); }
+
+/* ★ 절감 효과 강조 박스 */
+.saving-hero {
+  background: var(--black);
+  border-radius:var(--r);
+  padding: 28px 28px 24px;
+  position:relative; overflow:hidden;
+}
+[data-theme="dark"] .saving-hero { background: linear-gradient(135deg, #1a1a00 0%, #111100 100%); border:.5px solid rgba(255,230,0,.2); }
+.saving-hero::before {
+  content:'';
+  position:absolute; width:260px; height:260px;
+  background:var(--yellow); border-radius:50%;
+  top:-80px; right:-60px; opacity:.07;
+}
+.sh-eyebrow {
+  font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color: rgba(255,255,255,.35); margin-bottom:16px;
+  display:flex; align-items:center; gap:8px;
+}
+.sh-eyebrow::after { content:''; flex:1; height:.5px; background:rgba(255,255,255,.1); }
+
+/* 위펀 vs 잇그린 나란히 */
+.sh-vs {
+  display:grid; grid-template-columns:1fr auto 1fr; gap:12px; align-items:center; margin-bottom:24px;
+}
+.sh-option {
+  background: rgba(255,255,255,.06); border:.5px solid rgba(255,255,255,.1);
+  border-radius:10px; padding:16px 14px; text-align:center;
+  transition: var(--transition);
+}
+.sh-option.selected {
+  background: rgba(255,230,0,.12); border:.5px solid rgba(255,230,0,.4);
+}
+.sh-opt-lbl { font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:6px; }
+.sh-option.selected .sh-opt-lbl { color:rgba(255,230,0,.7); }
+.sh-opt-price { font-family:var(--fh); font-size:18px; font-weight:700; color:#fff; line-height:1; }
+.sh-option.selected .sh-opt-price { color:var(--yellow); }
+.sh-opt-sub { font-size:10px; color:rgba(255,255,255,.3); margin-top:4px; }
+.sh-vs-divider { text-align:center; font-size:11px; font-weight:700; color:rgba(255,255,255,.25); }
+
+/* 절감 결과 강조 */
+.sh-result {
+  background: rgba(255,230,0,.12); border:.5px solid rgba(255,230,0,.3);
+  border-radius:10px; padding:18px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-bottom:16px;
+}
+.sh-result-left {}
+.sh-result-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,230,0,.65); margin-bottom:4px; }
+.sh-result-val { font-family:var(--fh); font-size:28px; font-weight:700; color:var(--yellow); line-height:1; }
+.sh-result-desc { font-size:11px; color:rgba(255,255,255,.4); margin-top:4px; line-height:1.5; }
+.sh-result-badge {
+  background: var(--yellow); color:var(--black);
+  font-size:11px; font-weight:700; padding:6px 14px; border-radius:20px;
+  white-space:nowrap; flex-shrink:0;
+}
+
+/* 위펀 선택 시 혜택 목록 */
+.sh-pills { display:flex; flex-direction:column; gap:6px; }
+.sh-pill {
+  display:flex; align-items:center; gap:10px;
+  background: rgba(255,255,255,.05); border:.5px solid rgba(255,255,255,.08);
+  border-radius:8px; padding:8px 14px; font-size:12px; color:rgba(255,255,255,.65);
+}
+.sh-pill-icon { font-size:14px; flex-shrink:0; }
+.sh-pill b { color:var(--yellow); font-weight:500; }
+
+/* ─────────────────────────────────
+   ESG
+───────────────────────────────── */
 #esg { background: var(--black); }
-#esg .section-title { color: var(--white); }
-#esg .section-desc { color: rgba(255,255,255,0.45); }
-#esg .section-tag { color: rgba(255,255,255,0.3); }
-.esg-grid {
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
-}
+[data-theme="dark"] #esg { background: var(--bg2); }
+#esg .sec-tag { color:rgba(255,255,255,.3); }
+#esg .sec-title { color:#fff; }
+#esg .sec-desc { color:rgba(255,255,255,.45); }
+[data-theme="dark"] #esg .sec-tag { color:var(--muted); }
+[data-theme="dark"] #esg .sec-title { color:var(--text); }
+[data-theme="dark"] #esg .sec-desc { color:var(--muted); }
+.esg-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
 .esg-card {
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: var(--radius); padding: 32px;
-  opacity: 0; transform: translateY(20px);
-  transition: opacity .5s ease, transform .5s ease;
+  border:1px solid rgba(255,255,255,.1); border-radius:var(--r); padding:28px;
+  opacity:0; transform:translateY(20px);
+  transition: opacity .5s ease, transform .5s ease, background .2s;
 }
-.esg-card.visible { opacity: 1; transform: translateY(0); }
-.esg-card:nth-child(2).visible { transition-delay: .15s; }
-.esg-card:nth-child(3).visible { transition-delay: .3s; }
-.esg-card:hover { background: rgba(255,230,0,0.07); }
-.esg-icon { font-size: 32px; margin-bottom: 16px; display: block; }
-.esg-title {
-  font-family: var(--font-head); font-size: 17px;
-  font-weight: 700; color: var(--white); margin-bottom: 10px;
-}
-.esg-desc { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.75; }
+[data-theme="dark"] .esg-card { border-color:var(--bdr); }
+.esg-card.visible { opacity:1; transform:translateY(0); }
+.esg-card:hover { background:rgba(255,230,0,.07); }
+.esg-icon { font-size:30px; margin-bottom:14px; display:block; }
+.esg-title { font-family:var(--fh); font-size:16px; font-weight:700; color:#fff; margin-bottom:8px; }
+[data-theme="dark"] .esg-title { color:var(--text); }
+.esg-desc { font-size:13px; color:rgba(255,255,255,.5); font-weight:300; line-height:1.75; }
+[data-theme="dark"] .esg-desc { color:var(--muted); }
+.esg-card:nth-child(2).visible { transition-delay:.12s; }
+.esg-card:nth-child(3).visible { transition-delay:.24s; }
 .saving-strip {
-  background: rgba(255,230,0,0.1);
-  border: .5px solid rgba(255,230,0,0.25);
-  border-radius: var(--radius); padding: 28px 32px;
-  margin-top: 24px;
-  display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  background:rgba(255,230,0,.1); border:.5px solid rgba(255,230,0,.25);
+  border-radius:var(--r); padding:28px 32px; margin-top:24px;
+  display:flex; align-items:flex-start; justify-content:space-between; gap:24px; flex-wrap:wrap;
 }
-.saving-main { flex: 1; }
-.saving-eyebrow {
-  font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
-  color: rgba(255,255,255,0.35); font-weight: 300; margin-bottom: 8px;
-}
-.saving-num {
-  font-family: var(--font-head); font-size: 46px;
-  font-weight: 700; color: var(--yellow); line-height: 1; margin-bottom: 8px;
-}
-.saving-desc {
-  font-size: 13px; color: rgba(255,255,255,0.45);
-  font-weight: 300; line-height: 1.8;
-}
-.saving-pills {
-  display: flex; flex-direction: column; gap: 8px;
-  align-items: flex-end; flex-shrink: 0;
-}
-.s-pill {
-  background: rgba(255,255,255,0.06);
-  border: .5px solid rgba(255,255,255,0.1);
-  border-radius: 40px; padding: 7px 16px;
-  font-size: 12px; color: rgba(255,255,255,0.6); white-space: nowrap;
-}
-.s-pill b { color: var(--yellow); font-weight: 500; }
+[data-theme="dark"] .saving-strip { background:rgba(255,230,0,.07); }
+.saving-eyebrow { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.35); font-weight:300; margin-bottom:8px; }
+.saving-num { font-family:var(--fh); font-size:44px; font-weight:700; color:var(--yellow); line-height:1; margin-bottom:8px; }
+.saving-desc { font-size:13px; color:rgba(255,255,255,.45); font-weight:300; line-height:1.8; max-width:400px; }
+.saving-pills { display:flex; flex-direction:column; gap:7px; align-items:flex-end; flex-shrink:0; }
+.s-pill { background:rgba(255,255,255,.06); border:.5px solid rgba(255,255,255,.1); border-radius:40px; padding:7px 16px; font-size:12px; color:rgba(255,255,255,.65); white-space:nowrap; }
+.s-pill b { color:var(--yellow); font-weight:500; }
 
-/* ── ACTION ── */
-#action { background: var(--gray); }
-.action-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+/* ─────────────────────────────────
+   CHAT SIMULATION
+───────────────────────────────── */
+#simulation { background: var(--bg2); }
+.chat-wrap {
+  background: #DDDFE0; border-radius:var(--r); padding:28px; max-width:740px;
+  transition: var(--transition);
 }
+[data-theme="dark"] .chat-wrap { background:#1e2124; }
+.chat-row { display:flex; gap:10px; margin-bottom:14px; }
+.chat-row.from-right { flex-direction:row-reverse; }
+.chat-avatar {
+  width:36px; height:36px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; flex-shrink:0;
+}
+.chat-bubble {
+  padding:14px 18px; font-size:13px; line-height:1.75;
+  max-width:82%; box-shadow:0 2px 6px rgba(0,0,0,.05);
+}
+.from-left .chat-bubble {
+  background:#fff; border-radius:0 14px 14px 14px; color:#111;
+}
+[data-theme="dark"] .from-left .chat-bubble { background:#2a2a2a; color:var(--text); }
+.from-right .chat-bubble {
+  background:var(--yellow); border-radius:14px 0 14px 14px; color:var(--black);
+}
+.chat-time { font-size:10px; color:var(--muted); align-self:flex-end; margin:0 4px; white-space:nowrap; }
+
+/* ─────────────────────────────────
+   ACTION
+───────────────────────────────── */
+#action { background: var(--bg2); }
+.action-grid { display:grid; grid-template-columns:1fr; gap:10px; }
 .action-item {
-  display: flex; gap: 16px; align-items: flex-start;
-  padding: 18px 20px;
-  background: var(--white); border-radius: var(--radius-sm);
-  border: 1px solid var(--gray2);
-  transition: background .2s, transform .2s;
-  opacity: 0; transform: translateY(16px);
+  display:flex; gap:16px; align-items:flex-start;
+  padding:18px 20px;
+  background:var(--card); border-radius:var(--r-sm);
+  border:.5px solid var(--bdr);
+  transition: background .2s, transform .2s, border-color .2s;
+  opacity:0; transform:translateY(16px);
   transition: opacity .4s ease, transform .4s ease;
 }
-.action-item.visible { opacity: 1; transform: translateY(0); }
-.action-item:hover { background: #FFFDE8; transform: translateY(-2px); border-color: #FFE600; }
+.action-item.visible { opacity:1; transform:translateY(0); }
+.action-item:hover { background:rgba(255,230,0,.07); transform:translateY(-2px); border-color:rgba(255,230,0,.4); }
 .action-num {
-  width: 28px; height: 28px; background: var(--black);
-  color: var(--yellow); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  width:28px; height:28px; background:var(--black); color:var(--yellow);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; flex-shrink:0; margin-top:1px;
 }
-.action-body { font-size: 13px; line-height: 1.7; }
-.action-body strong { font-weight: 600; }
-.action-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+[data-theme="dark"] .action-num { background:var(--yellow); color:var(--black); }
+.action-body { font-size:13px; line-height:1.7; color:var(--text); }
+.action-body strong { font-weight:600; }
+.action-sub { font-size:12px; color:var(--muted); margin-top:3px; }
 
-/* ── FOOTER CTA ── */
-#cta {
-  background: var(--yellow); text-align: center;
-  padding: 120px 80px;
-}
-#cta .section-tag { color: rgba(0,0,0,0.4); }
-#cta .section-title { color: var(--black); margin-bottom: 8px; }
-#cta .section-desc { color: rgba(0,0,0,0.55); margin: 0 auto 40px; text-align: center; }
-.cta-buttons { display: flex; justify-content: center; gap: 14px; }
+/* ─────────────────────────────────
+   CTA / FOOTER
+───────────────────────────────── */
+#cta { background: var(--yellow); text-align:center; padding:100px 80px; }
+#cta .sec-tag { color:rgba(0,0,0,.4); }
+#cta .sec-title { color:var(--black); margin-bottom:8px; }
+#cta .sec-desc { color:rgba(0,0,0,.55); margin:0 auto 40px; text-align:center; }
+.cta-buttons { display:flex; justify-content:center; gap:14px; }
 .btn-dark {
-  background: var(--black); color: var(--yellow);
-  font-size: 15px; font-weight: 700;
-  padding: 16px 36px; border-radius: 40px;
-  border: none; cursor: pointer; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 8px;
+  background:var(--black); color:var(--yellow);
+  font-size:15px; font-weight:700;
+  padding:16px 36px; border-radius:40px;
+  border:none; cursor:pointer; text-decoration:none;
+  display:inline-flex; align-items:center; gap:8px;
   transition: transform .2s, opacity .2s;
 }
-.btn-dark:hover { transform: translateY(-2px); opacity: .9; }
-
-/* ── FOOTER ── */
+.btn-dark:hover { transform:translateY(-2px); opacity:.9; }
 footer {
-  background: var(--black); padding: 40px 80px;
-  display: flex; align-items: center; justify-content: space-between;
+  background:var(--black); padding:40px 80px;
+  display:flex; align-items:center; justify-content:space-between;
 }
-.footer-brand {
-  font-family: var(--font-head); font-size: 15px;
-  font-weight: 700; color: var(--white);
-  display: flex; align-items: center; gap: 8px;
-}
-.footer-brand span {
-  background: var(--yellow); color: var(--black);
-  padding: 3px 8px; border-radius: 6px; font-size: 11px;
-}
-.footer-info {
-  font-size: 12px; color: rgba(255,255,255,0.3);
-  font-weight: 300; text-align: right;
-}
+[data-theme="dark"] footer { background:#000; }
+.footer-brand { font-family:var(--fh); font-size:15px; font-weight:700; color:#fff; display:flex; align-items:center; gap:8px; }
+.footer-brand span { background:var(--yellow); color:var(--black); padding:3px 8px; border-radius:6px; font-size:11px; }
+.footer-info { font-size:12px; color:rgba(255,255,255,.3); font-weight:300; text-align:right; line-height:1.6; }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+/* ─────────────────────────────────
+   ANIMATIONS
+───────────────────────────────── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 1024px) {
-  .hero { grid-template-columns: 1fr; padding: 80px 40px; }
-  .hero-right { display: none; }
-  .cost-layout { grid-template-columns: 1fr; }
-  section { padding: 80px 40px; }
-  nav { padding: 0 24px; }
-  footer { flex-direction: column; gap: 16px; text-align: center; }
-  .footer-info { text-align: center; }
-  #cta { padding: 80px 40px; }
+/* ─────────────────────────────────
+   RESPONSIVE
+───────────────────────────────── */
+@media(max-width:1024px) {
+  .hero { grid-template-columns:1fr; padding:80px 40px; }
+  .hero-right { display:none; }
+  .cost-layout { grid-template-columns:1fr; }
+  section { padding:80px 40px; }
+  nav { padding:0 20px; }
+  .nav-jumps { display:none; }
+  footer { flex-direction:column; gap:16px; text-align:center; }
+  .footer-info { text-align:center; }
 }
-@media (max-width: 768px) {
-  .hero { padding: 60px 24px; }
-  section { padding: 60px 24px; }
-  .spots-grid { grid-template-columns: repeat(3,1fr); }
-  .metrics { grid-template-columns: 1fr 1fr; }
-  .two-col { grid-template-columns: 1fr; }
-  .esg-grid { grid-template-columns: 1fr; }
-  .action-grid { grid-template-columns: 1fr; }
-  table thead th, table tbody td { padding: 10px 12px; font-size: 12px; }
-  .saving-pills { align-items: flex-start; }
-  footer { padding: 32px 24px; }
-  #cta { padding: 60px 24px; }
+@media(max-width:768px) {
+  section { padding:60px 20px; }
+  .spots-grid { grid-template-columns:repeat(3,1fr); }
+  .metrics { grid-template-columns:1fr 1fr; }
+  .two-col { grid-template-columns:1fr; }
+  .esg-grid { grid-template-columns:1fr; }
+  .saving-pills { align-items:flex-start; }
+  .sh-vs { grid-template-columns:1fr; }
+  .sh-vs-divider { display:none; }
+  footer { padding:32px 20px; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ── NAV ── -->
 <nav>
   <div class="nav-logo">링키지랩 <span class="nav-badge">다회용컵 검토서</span></div>
-  <a href="#action" class="nav-rec">
-    <div class="nav-dot"></div>최종 추천: 위펀
-  </a>
+  <div class="nav-right">
+    <div class="nav-jumps">
+      <a href="#spots" class="nav-jump">01 운영 현황</a>
+      <a href="#compare" class="nav-jump">02 업체 비교</a>
+      <a href="#specs" class="nav-jump">03 반납함 사양</a>
+      <a href="#cost" class="nav-jump">04 비용 분석</a>
+      <a href="#esg" class="nav-jump">05 ESG 효과</a>
+      <a href="#action" class="nav-jump">07 확인 사항</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="다크모드 전환">
+      <span class="toggle-icon icon-sun">☀️</span>
+      <span class="toggle-icon icon-moon">🌙</span>
+    </button>
+    <a href="#action" class="nav-rec">
+      <div class="nav-dot"></div>최종 추천: 위펀
+    </a>
+  </div>
 </nav>
 
-<!-- HERO -->
+<!-- ── HERO ── -->
 <section class="hero" id="home" style="padding-bottom:0;">
   <div class="hero-text">
-    <div class="hero-badge">카카오모빌리티 ESG 파일럿 · 다회용컵 업체 비교 검토서</div>
+    <div class="hero-badge">카카오 ESG 파일럿 · 다회용컵 업체 비교 검토서</div>
     <h1>위펀 vs 잇그린<br><em>최종 추천: 위펀</em></h1>
     <p class="hero-desc">
       6개 스팟 · 스팟당 일 100개 (오전50 + 오후50) · 3주(영업일 15일)<br>
-      종이컵 대비 226,500원 절감 + 일회용컵 9,000개 절감
+      종이컵 대비 226,500원 절감 + 일회용컵 13,500개 원천 감축
     </p>
     <div class="hero-cta">
       <a href="#compare" class="btn-primary">비교 검토 보기 →</a>
       <a href="#cost" class="btn-ghost">비용 구조 보기</a>
     </div>
     <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-val">6개</span>
-        <span class="stat-lbl">운영 스팟</span>
-      </div>
-      <div class="stat">
-        <span class="stat-val">9,000잔</span>
-        <span class="stat-lbl">3주 총 사용량</span>
-      </div>
-      <div class="stat">
-        <span class="stat-val">무상 제공</span>
-        <span class="stat-lbl">위펀 파일럿 비용</span>
-      </div>
-      <div class="stat">
-        <span class="stat-val">-226,500원</span>
-        <span class="stat-lbl">종이컵 대비 예산 절감</span>
-      </div>
+      <div class="stat"><span class="stat-val">6개</span><span class="stat-lbl">운영 스팟</span></div>
+      <div class="stat"><span class="stat-val">9,000잔</span><span class="stat-lbl">3주 총 사용량</span></div>
+      <div class="stat"><span class="stat-val">무상</span><span class="stat-lbl">위펀 파일럿 비용</span></div>
+      <div class="stat"><span class="stat-val">-226,500원</span><span class="stat-lbl">종이컵 대비 절감</span></div>
     </div>
   </div>
-
-  <!-- RIGHT: REC CARD -->
   <div class="hero-right">
     <div class="rec-card">
-      <div class="rec-card-header">
+      <div class="rec-card-hdr">
         <span class="rec-label">최종 추천 업체</span>
         <span class="rec-badge-pill"><span class="nav-dot"></span>RECOMMENDED</span>
       </div>
-      <div>
-        <div class="rec-name"><em>위펀</em><br>파일럿 운영</div>
-      </div>
+      <div><div class="rec-name"><em>위펀</em><br>파일럿 운영</div></div>
       <div class="rec-price-wrap">
         <span class="rec-price-lbl">파일럿 비용 (VAT 별도)</span>
-        <span class="rec-price" style="font-size:34px;">무상 제공</span>
+        <span class="rec-price">무상 제공</span>
         <span class="rec-price-sub">물류비 300,000원만 부담 · 분실금 포함 무상</span>
       </div>
       <div class="rec-pills">
         <div class="rec-pill">반납함 파일럿 기간 <b>무상 제공</b></div>
         <div class="rec-pill">분실금 파일럿 기간 <b>전액 무상 면책</b></div>
         <div class="rec-pill">잇그린 대비 약 <b>1,445,000원 절감</b></div>
-        <div class="rec-pill">일회용컵(종이컵) <b>13,500개 절감</b></div>
         <div class="rec-pill">종이컵 대비 <b>226,500원 예산 절감</b></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SPOTS -->
+<!-- ── SPOTS ── -->
 <section id="spots">
-  <p class="section-tag">01 · Operations</p>
-  <h2 class="section-title">층별 운영 스팟 배치</h2>
-  <p class="section-desc">B동 6개 스팟에서 오전·오후 2회 진열 운영. 스팟당 일 100개 기준 (오전 50개 + 오후 50개)입니다.</p>
+  <p class="sec-tag">01 · Operations</p>
+  <h2 class="sec-title">층별 운영 스팟 배치</h2>
+  <p class="sec-desc">B동 6개 스팟에서 오전·오후 2회 진열 운영. 스팟당 일 100개 기준 (오전 50개 + 오후 50개)입니다.</p>
   <div class="spots-grid">
     <div class="spot-card"><div class="spot-floor">3B<span>층</span></div><div class="spot-char">라이언</div><div class="spot-qty">오전 50개 · 오후 50개</div></div>
     <div class="spot-card"><div class="spot-floor">6B<span>층</span></div><div class="spot-char">라이언</div><div class="spot-qty">오전 50개 · 오후 50개</div></div>
@@ -682,15 +755,15 @@ footer {
     <div class="metric"><div class="metric-val">600개</div><div class="metric-lbl">일 총 사용량<br>스팟 × 100개/일</div></div>
     <div class="metric"><div class="metric-val">9,000잔</div><div class="metric-lbl">3주 총 사용량<br>600개 × 15일</div></div>
     <div class="metric"><div class="metric-val">6개</div><div class="metric-lbl">반납함 수량<br>스팟당 1개</div></div>
-    <div class="metric"><div class="metric-val" style="color:var(--green);">-226,500원</div><div class="metric-lbl">종이컵(13,500개) 대비 절감<br>위펀 파일럿 도입 시</div></div>
+    <div class="metric"><div class="metric-val" style="color:var(--green);">-226,500원</div><div class="metric-lbl">종이컵(13,500개) 대비 절감<br>위펀 파일럿 선택 시</div></div>
   </div>
 </section>
 
-<!-- COMPARE -->
+<!-- ── COMPARE ── -->
 <section id="compare">
-  <p class="section-tag">02 · Comparison</p>
-  <h2 class="section-title">업체 상세 비교</h2>
-  <p class="section-desc">위펀과 잇그린의 비용, 서비스 조건, 위생 관리 방식을 항목별로 비교합니다.</p>
+  <p class="sec-tag">02 · Comparison</p>
+  <h2 class="sec-title">업체 상세 비교</h2>
+  <p class="sec-desc">위펀과 잇그린의 비용, 서비스 조건, 위생 관리 방식을 항목별로 비교합니다.</p>
   <div class="compare-card">
     <table>
       <thead>
@@ -727,15 +800,8 @@ footer {
           <td class="td-itgreen"><span class="warn">견적 비용에 분실 부담금 포함</span></td>
         </tr>
         <tr>
-          <td>운영 스팟 / 진열</td>
-          <td class="td-wefun" colspan="2" style="background:#F9FAF9; text-align:center; color:var(--text);">
-            B동 6개 스팟 공통 · 오전 10:30 / 오후 12:30 · 스팟당 오전50 + 오후50개
-          </td>
-        </tr>
-        <tr>
-          <td>수거함 여부</td>
-          <td class="td-wefun"><span class="chip chip-g">6개 모두 가능</span><br>
-          <td class="td-itgreen"><span class="chip chip-g">6개 모두 가능</span></td>
+          <td>운영 스팟</td>
+          <td class="td-wefun" colspan="2" style="text-align:center;">B동 6개 스팟 공통 · 오전 10:30 / 오후 12:30 · 스팟당 오전50 + 오후50개</td>
         </tr>
         <tr>
           <td>컵 규격</td>
@@ -767,11 +833,11 @@ footer {
   </div>
 </section>
 
-<!-- SPECS -->
+<!-- ── SPECS ── -->
 <section id="specs">
-  <p class="section-tag">03 · Specifications</p>
-  <h2 class="section-title">반납함 사양 비교</h2>
-  <p class="section-desc">두 업체의 반납함 규격, 소재, 비용을 항목별로 확인합니다.</p>
+  <p class="sec-tag">03 · Specifications</p>
+  <h2 class="sec-title">반납함 사양 비교</h2>
+  <p class="sec-desc">두 업체의 반납함 규격, 소재, 비용을 항목별로 확인합니다.</p>
   <div class="two-col">
     <div class="detail-card">
       <div class="detail-card-header">
@@ -784,7 +850,7 @@ footer {
       <div class="detail-row"><span class="k">규격</span><span class="v">650 × 450 × 1,100mm</span></div>
       <div class="detail-row"><span class="k">소재</span><span class="v">알루미늄, 폼펙스</span></div>
       <div class="detail-row"><span class="k">무게</span><span class="v">14kg</span></div>
-      <div class="detail-row"><span class="k">수거함 여부</span><span class="v">6개 모두 가능 </span></div>
+      <div class="detail-row"><span class="k">수거함 여부</span><span class="v">6개 모두 가능</span></div>
       <div class="detail-row"><span class="k">제작 완료</span><span class="v">6월 2주차 이내</span></div>
       <div class="detail-row"><span class="k">파일럿 비용</span><span class="v" style="color:var(--green);font-weight:700;">무상 제공</span></div>
     </div>
@@ -806,12 +872,14 @@ footer {
   </div>
 </section>
 
-<!-- COST -->
+<!-- ── COST (04) ── -->
 <section id="cost">
-  <p class="section-tag">04 · Pricing</p>
-  <h2 class="section-title">잇그린 비용 상세</h2>
-  <p class="section-desc">3주 파일럿 기준 잇그린 상세 비용 구조입니다. 항목별 투명하게 공개합니다.</p>
+  <p class="sec-tag">04 · Pricing</p>
+  <h2 class="sec-title">잇그린 비용 상세<br>+ 위펀 선택 시 절감 효과</h2>
+  <p class="sec-desc">3주 파일럿 기준 잇그린 상세 비용 구조와, 위펀 선택 시 얼마나 절감되는지 한눈에 확인합니다.</p>
   <div class="cost-layout">
+
+    <!-- 왼쪽: 잇그린 비용 -->
     <div>
       <div class="cost-item">
         <div class="cost-num">01</div>
@@ -837,7 +905,7 @@ footer {
         </div>
         <div class="cost-val">50,000원</div>
       </div>
-      <div class="cost-item" style="border: 1px dashed var(--amber); background:var(--amber-bg);">
+      <div class="cost-item" style="border:.5px dashed var(--amber);background:var(--amber-bg);">
         <div class="cost-num" style="background:var(--amber);">04</div>
         <div class="cost-info">
           <p class="cost-name">분실 처리 비용</p>
@@ -851,23 +919,78 @@ footer {
         <p class="total-note">컵 1,620,000 + 회수 75,000 + 반납함 50,000 · 위펀 대비 <em>약 1,445,000원 추가 발생</em></p>
       </div>
     </div>
-    <div>
-      <div class="calc-box">
-        <p class="calc-title">위펀 vs 잇그린 최종 비교</p>
-        <div class="calc-row"><span class="k">위펀 파일럿 비용</span><span class="v" style="color:var(--green);font-weight:700;">무상 제공 (물류비 300,000원)</span></div>
-        <div class="calc-row"><span class="k">잇그린 파일럿 비용</span><span class="v" style="color:var(--red);">1,745,000원~</span></div>
-        <hr class="calc-divider">
-        <div class="calc-row final"><span class="k">절감 효과</span><span class="v" style="color:var(--green);">약 1,445,000원</span></div>
+
+    <!-- 오른쪽: ★ 절감 효과 패널 -->
+    <div class="saving-panel">
+      <!-- 간단 비교 요약 -->
+      <div class="compare-summary">
+        <div class="compare-summary-row">
+          <span class="csk">위펀 파일럿 비용</span>
+          <span class="csv" style="color:var(--green);font-weight:700;">무상 제공 (물류비 300,000원)</span>
+        </div>
+        <div class="compare-summary-row">
+          <span class="csk">잇그린 파일럿 비용</span>
+          <span class="csv" style="color:var(--red);">1,745,000원~</span>
+        </div>
+      </div>
+
+      <!-- ★ 절감 효과 강조 박스 -->
+      <div class="saving-hero">
+        <div class="sh-eyebrow">위펀 선택 시 절감 효과</div>
+
+        <!-- 위펀 vs 잇그린 나란히 비교 -->
+        <div class="sh-vs">
+          <div class="sh-option selected">
+            <div class="sh-opt-lbl">✓ 위펀 선택</div>
+            <div class="sh-opt-price">300,000원</div>
+            <div class="sh-opt-sub">물류비만 부담</div>
+          </div>
+          <div class="sh-vs-divider">vs</div>
+          <div class="sh-option">
+            <div class="sh-opt-lbl">잇그린</div>
+            <div class="sh-opt-price">1,745,000원~</div>
+            <div class="sh-opt-sub">반납함·분실금 별도</div>
+          </div>
+        </div>
+
+        <!-- 절감 결과 -->
+        <div class="sh-result">
+          <div class="sh-result-left">
+            <div class="sh-result-label">업체 간 비용 절감</div>
+            <div class="sh-result-val">약 1,445,000원</div>
+            <div class="sh-result-desc">잇그린 대비 위펀 선택 시 절감</div>
+          </div>
+          <div class="sh-result-badge">위펀 추천</div>
+        </div>
+
+        <!-- 종이컵 대비 추가 절감 -->
+        <div class="sh-result" style="background:rgba(26,122,88,.2);border-color:rgba(26,122,88,.4);">
+          <div class="sh-result-left">
+            <div class="sh-result-label" style="color:rgba(100,220,160,.8);">종이컵 대비 예산 절감</div>
+            <div class="sh-result-val" style="color:#4BCD97;">-226,500원</div>
+            <div class="sh-result-desc">종이컵(526,500원) → 위펀(300,000원)</div>
+          </div>
+          <div class="sh-result-badge" style="background:#4BCD97;color:#000;">예산 세이브</div>
+        </div>
+
+        <!-- 위펀 선택 시 혜택 목록 -->
+        <div class="sh-pills">
+          <div class="sh-pill"><span class="sh-pill-icon">♻️</span>일회용컵 <b>13,500개 원천 감축</b> + ESG 성과</div>
+          <div class="sh-pill"><span class="sh-pill-icon">🆓</span>반납함 파일럿 기간 <b>전액 무상 제공</b></div>
+          <div class="sh-pill"><span class="sh-pill-icon">🛡️</span>분실금 파일럿 기간 <b>전액 무상 면책</b></div>
+          <div class="sh-pill"><span class="sh-pill-icon">💡</span>한정 프로모션 특가 — 정상 시세 대비 <b>1,445,000원 할인</b></div>
+        </div>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- ESG -->
+<!-- ── ESG ── -->
 <section id="esg">
-  <p class="section-tag">05 · ESG Impact</p>
-  <h2 class="section-title">종이컵 대비<br>ESG 절감 효과</h2>
-  <p class="section-desc">다회용컵 전환으로 달성할 수 있는 환경 절감 효과와 ESG 성과를 확인합니다.</p>
+  <p class="sec-tag">05 · ESG Impact</p>
+  <h2 class="sec-title">종이컵 대비<br>ESG 절감 효과</h2>
+  <p class="sec-desc">다회용컵 전환으로 달성할 수 있는 환경 절감 효과와 ESG 성과를 확인합니다.</p>
   <div class="esg-grid">
     <div class="esg-card">
       <span class="esg-icon">🗑️</span>
@@ -886,7 +1009,7 @@ footer {
     </div>
   </div>
   <div class="saving-strip">
-    <div class="saving-main">
+    <div>
       <div class="saving-eyebrow">종이컵 대비 위펀 도입 시 예산 절감</div>
       <div class="saving-num">-226,500원</div>
       <div class="saving-desc">종이컵 3주 비용(526,500원) 대비 위펀 물류비(300,000원)만 부담.<br>일회용컵 13,500잔을 절감하고 복지 예산 226,500원까지 즉시 세이브.</div>
@@ -901,42 +1024,37 @@ footer {
   </div>
 </section>
 
-<!-- CHAT SIMULATION -->
-<section id="simulation" style="background: var(--gray);">
-  <p class="section-tag">06 · Cost Simulation</p>
-  <h2 class="section-title">종이컵 vs 다회용컵<br>예산 비교 시뮬레이션</h2>
-  <p class="section-desc">현재 종이컵 소모 예산과 위펀 다회용컵 도입 비용을 실제로 비교합니다.</p>
-  <div style="background:#EAEEF2; border-radius:var(--radius); padding:28px; max-width:720px;">
-
-    <div style="display:flex; gap:10px; margin-bottom:16px; max-width:85%;">
-      <div style="width:36px;height:36px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--black);flex-shrink:0;">kakao</div>
-      <div style="background:#fff;padding:14px 18px;border-radius:0 14px 14px 14px;font-size:13px;line-height:1.7;box-shadow:0 2px 4px rgba(0,0,0,0.04);flex:1;">
-        B동 6개 스팟에서 일 150개 (오전100/오후50)씩 종이컵을 쭉 쓰던 것과 비교하면 예산 격차가 얼마나 되나요?
-      </div>
-      <span style="font-size:10px;color:var(--muted);align-self:flex-end;margin:0 4px;white-space:nowrap;">오전 11:30</span>
+<!-- ── CHAT SIMULATION ── -->
+<section id="simulation">
+  <p class="sec-tag">06 · Cost Simulation</p>
+  <h2 class="sec-title">종이컵 vs 다회용컵<br>예산 비교 시뮬레이션</h2>
+  <p class="sec-desc">현재 종이컵 소모 예산과 위펀 다회용컵 도입 비용을 실제로 비교합니다.</p>
+  <div class="chat-wrap">
+    <div class="chat-row from-left">
+      <div class="chat-avatar" style="background:var(--yellow);color:var(--black);">kakao</div>
+      <div class="chat-bubble">B동 6개 스팟에서 일 150개씩 종이컵을 쭉 쓰던 것과 비교하면 예산 격차가 얼마나 되나요?</div>
+      <span class="chat-time">오전 11:30</span>
     </div>
-
-    <div style="display:flex; flex-direction:row-reverse; gap:10px; margin-bottom:0; margin-left:auto; max-width:90%;">
-      <div style="width:36px;height:36px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;">ESG</div>
-      <div style="background:var(--yellow);padding:14px 18px;border-radius:14px 0 14px 14px;font-size:13px;line-height:1.8;color:var(--black);flex:1;">
+    <div class="chat-row from-right">
+      <div class="chat-avatar" style="background:var(--green);color:#fff;">ESG</div>
+      <div class="chat-bubble">
         <b>종이컵 유지 비용보다 위펀 다회용컵 도입이 약 226,500원 더 저렴합니다! 💡</b><br><br>
-        다만, 이번 위펀의 제안은 신규 시장 진입 및 레퍼런스 선점을 위해 기획된 <b>[한정 프로모션 특가]</b>입니다. 타 전문 플랫폼(잇그린)의 정상 시세인 약 174만 원과 비교하면 <b>약 144만 원이나 저렴한 파격적인 조건</b>이며, 파일럿 기간 내 컵 대여료와 분실/파손 비용까지 전액 무상 면책됩니다.<br><br>
+        이번 위펀의 제안은 신규 시장 진입을 위한 <b>[한정 프로모션 특가]</b>입니다. 정상 시세(잇그린 기준 약 174만원) 대비 <b>약 144만원이나 저렴</b>하며, 컵 대여료와 분실·파손 비용까지 전액 무상 면책됩니다.<br><br>
         • <b>현재 종이컵 사용 시:</b> 3주 총 13,500개 기준 <b>526,500원</b> 소모<br>
-        • <b>위펀 프로모션 도입 시:</b> 파일럿 총 비용 <b>300,000원</b> 고정 (순수 물류비만 부담)<br><br>
-        결과적으로 일회용 폐기물 13,500잔을 원천 감축하는 확실한 ESG 성과를 거두면서도, <b>정상 시세 대비 좋은 조건으로 파일럿을 테스트하여 복지 예산 226,500원까지 즉시 세이브</b>할 수 있습니다.
+        • <b>위펀 도입 시:</b> 총 비용 <b>300,000원</b> 고정 (순수 물류비만 부담)<br><br>
+        결과적으로 일회용 폐기물 13,500잔을 원천 감축하면서도, <b>복지 예산 226,500원까지 즉시 세이브</b>할 수 있습니다.
       </div>
-      <span style="font-size:10px;color:var(--muted);align-self:flex-end;margin:0 4px;white-space:nowrap;">오전 11:32</span>
+      <span class="chat-time">오전 11:32</span>
     </div>
-
   </div>
 </section>
 
-<!-- ACTION -->
+<!-- ── ACTION ── -->
 <section id="action">
-  <p class="section-tag">07 · Action Items</p>
-  <h2 class="section-title">사전 확인 필요 사항</h2>
-  <p class="section-desc">위펀 파일럿 운영 전 확인해야 할 협의 항목입니다.</p>
-  <div class="action-grid" style="grid-template-columns: 1fr;">
+  <p class="sec-tag">07 · Action Items</p>
+  <h2 class="sec-title">사전 확인 필요 사항</h2>
+  <p class="sec-desc">위펀 파일럿 운영 전 확인해야 할 협의 항목입니다.</p>
+  <div class="action-grid">
     <div class="action-item">
       <div class="action-num">1</div>
       <div class="action-body"><strong>품질 및 위생 보증 프로세스</strong><div class="action-sub">파일럿 진행 중 세척 상태 불량 등 퀄리티 이슈 발생 시 즉각적인 교환 및 조치 프로세스 협의</div></div>
@@ -948,38 +1066,52 @@ footer {
   </div>
 </section>
 
-<!-- CTA -->
+<!-- ── CTA ── -->
 <section id="cta">
-  <p class="section-tag">Get Started</p>
-  <h2 class="section-title">링키지랩과 함께하는 ESG! </h2>
-  <p class="section-desc">세부 운영 범위는 언제든 협의 가능합니다.<br>종이컵(13,500개) 대비 226,500원 절감 + 일회용컵 13,500개 원천 감축.</p>
+  <p class="sec-tag">Get Started</p>
+  <h2 class="sec-title">링키지랩과 함께하는 ESG!</h2>
+  <p class="sec-desc">세부 운영 범위는 언제든 협의 가능합니다.<br>종이컵(13,500개) 대비 226,500원 절감 + 일회용컵 13,500개 원천 감축.</p>
   <div class="cta-buttons">
     <a href="#compare" class="btn-dark">비교 검토 다시 보기 →</a>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-brand">Linkagelab <span>다회용컵 검토서</span></div>
   <div class="footer-info">
-    카카오모빌리티 × 링키지랩 · 스낵앤가든사업팀<br>
+    카카오 × 링키지랩 · 스낵앤가든사업팀<br>
     © 2026 Linkagelab. 파일럿 운영 기간 6/8 ~ 6/26
   </div>
 </footer>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
+/* ── 다크모드 토글 ── */
+const toggle = document.getElementById('themeToggle');
+const html   = document.documentElement;
 
-  document.querySelectorAll(
-    '.spot-card, .metric, .compare-card, .detail-card, .cost-item, .total-box, .calc-box, .esg-card, .action-item'
-  ).forEach((el, i) => {
-    if (el.classList.contains('spot-card')) el.style.transitionDelay = (i * 0.06) + 's';
-    if (el.classList.contains('metric')) el.style.transitionDelay = (i * 0.08) + 's';
-    if (el.classList.contains('action-item')) el.style.transitionDelay = (i * 0.07) + 's';
-    observer.observe(el);
-  });
+const saved = localStorage.getItem('theme');
+if (saved) html.setAttribute('data-theme', saved);
+
+toggle.addEventListener('click', () => {
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
+
+/* ── 스크롤 진입 애니메이션 ── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+
+document.querySelectorAll(
+  '.spot-card,.metric,.compare-card,.detail-card,.cost-item,.total-box,.calc-box,.esg-card,.action-item,.saving-panel'
+).forEach((el, i) => {
+  if (el.classList.contains('spot-card'))  el.style.transitionDelay = (i * 0.05) + 's';
+  if (el.classList.contains('metric'))     el.style.transitionDelay = (i * 0.07) + 's';
+  if (el.classList.contains('action-item'))el.style.transitionDelay = (i * 0.07) + 's';
+  io.observe(el);
+});
 </script>
 </body>
 </html>
