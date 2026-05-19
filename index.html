@@ -511,13 +511,13 @@ footer { background:var(--black); padding:40px 80px; display:flex; align-items:c
   }
 
   @page {
-    size: A4 portrait;
-    margin: 12mm 14mm 14mm 14mm;
+    size: A4 landscape;
+    margin: 10mm 14mm 12mm 14mm;
   }
 
   html, body {
-    width: 210mm;
-    font-size: 11pt;
+    width: 297mm;
+    font-size: 10.5pt;
     line-height: 1.5;
     background: #fff !important;
     color: #111 !important;
@@ -548,7 +548,7 @@ footer { background:var(--black); padding:40px 80px; display:flex; align-items:c
 
   /* ── 섹션 공통 ── */
   section {
-    padding: 14mm 0 10mm !important;
+    padding: 10mm 0 8mm !important;
     page-break-inside: avoid;
     break-inside: avoid;
   }
@@ -572,11 +572,11 @@ footer { background:var(--black); padding:40px 80px; display:flex; align-items:c
     height: auto !important;
     display: block !important;
     background: #111 !important;
-    padding: 20mm 14mm 16mm !important;
+    padding: 14mm 14mm 12mm !important;
     border-radius: 0 !important;
   }
-  .hero-right { display: block !important; margin-top: 10mm; }
-  .hero h1 { font-size: 26pt !important; color: #fff !important; opacity: 1 !important; }
+  .hero-right { display: block !important; margin-top: 8mm; }
+  .hero h1 { font-size: 24pt !important; color: #fff !important; opacity: 1 !important; }
   .hero h1 em { color: #FFE600 !important; }
   .hero-badge { opacity: 1 !important; color: #FFE600 !important; border-color: rgba(255,230,0,.4) !important; background: rgba(255,230,0,.15) !important; }
   .hero-desc { opacity: 1 !important; color: rgba(255,255,255,.7) !important; font-size: 10pt !important; }
@@ -606,95 +606,95 @@ footer { background:var(--black); padding:40px 80px; display:flex; align-items:c
   .rec-pill b { color: #FFE600 !important; }
 
   /* ── 운영 현황 ── */
-  #spots { background: #F5F5F3 !important; padding: 12mm 0 10mm !important; }
-  .spots-grid { grid-template-columns: repeat(6,1fr) !important; gap: 6pt !important; }
-  .spot-card { padding: 10pt 8pt !important; background: #fff !important; border: 0.5pt solid #ddd !important; border-radius: 6pt !important; }
-  .spot-floor { font-size: 14pt !important; }
-  .spot-char { font-size: 8pt !important; }
-  .spot-qty { font-size: 7.5pt !important; }
-  .metrics { grid-template-columns: repeat(4,1fr) !important; gap: 8pt !important; margin-top: 8mm !important; }
-  .metric { padding: 12pt !important; background: #fff !important; border: 0.5pt solid #ddd !important; }
-  .metric-val { font-size: 16pt !important; }
-  .metric-lbl { font-size: 8pt !important; }
+  #spots { background: #F5F5F3 !important; padding: 10mm 0 8mm !important; }
+  .spots-grid { grid-template-columns: repeat(6,1fr) !important; gap: 5pt !important; }
+  .spot-card { padding: 8pt 6pt !important; background: #fff !important; border: 0.5pt solid #ddd !important; border-radius: 5pt !important; }
+  .spot-floor { font-size: 13pt !important; }
+  .spot-char { font-size: 7.5pt !important; }
+  .spot-qty { font-size: 7pt !important; }
+  .metrics { grid-template-columns: repeat(4,1fr) !important; gap: 6pt !important; margin-top: 6mm !important; }
+  .metric { padding: 10pt !important; background: #fff !important; border: 0.5pt solid #ddd !important; }
+  .metric-val { font-size: 14pt !important; }
+  .metric-lbl { font-size: 7.5pt !important; }
 
   /* ── 업체 비교 테이블 ── */
-  #compare { background: #fff !important; padding: 12mm 0 10mm !important; }
-  .compare-card { border: 0.5pt solid #ddd !important; border-radius: 8pt !important; }
-  thead th { padding: 8pt 10pt !important; font-size: 9pt !important; }
+  #compare { background: #fff !important; padding: 10mm 0 8mm !important; }
+  .compare-card { border: 0.5pt solid #ddd !important; border-radius: 7pt !important; }
+  thead th { padding: 7pt 9pt !important; font-size: 8.5pt !important; }
   .th-wefun  { background: #FFF9E6 !important; color: #8A6A00 !important; }
   .th-itgreen { background: #F0F7F3 !important; color: #4A7A60 !important; }
-  tbody td { padding: 8pt 10pt !important; font-size: 9pt !important; }
+  tbody td { padding: 7pt 9pt !important; font-size: 8.5pt !important; }
   .td-wefun  { background: #FFFEF7 !important; }
   .td-itgreen { background: #F7FBF8 !important; }
-  .price-main { font-size: 13pt !important; }
-  .chip { font-size: 7pt !important; padding: 1pt 6pt !important; }
+  .price-main { font-size: 12pt !important; }
+  .chip { font-size: 6.5pt !important; padding: 1pt 5pt !important; }
 
   /* ── 반납함 사양 ── */
-  #specs { background: #F5F5F3 !important; padding: 12mm 0 10mm !important; }
-  .two-col { gap: 8pt !important; }
-  .detail-card { border: 0.5pt solid #ddd !important; background: #fff !important; border-radius: 8pt !important; }
-  .detail-card-header { padding: 10pt 12pt !important; }
-  .detail-row { padding: 7pt 12pt !important; font-size: 9pt !important; }
+  #specs { background: #F5F5F3 !important; padding: 10mm 0 8mm !important; }
+  .two-col { gap: 7pt !important; }
+  .detail-card { border: 0.5pt solid #ddd !important; background: #fff !important; border-radius: 7pt !important; }
+  .detail-card-header { padding: 9pt 11pt !important; }
+  .detail-row { padding: 6pt 11pt !important; font-size: 8.5pt !important; }
 
   /* ── 비용 분석 ── */
-  #cost { background: #fff !important; padding: 12mm 0 10mm !important; }
-  .cost-layout { grid-template-columns: 1fr 1fr !important; gap: 10mm !important; }
+  #cost { background: #fff !important; padding: 10mm 0 8mm !important; }
+  .cost-layout { grid-template-columns: 1fr 1fr !important; gap: 8mm !important; }
   .cost-item {
-    padding: 10pt 12pt !important; margin-bottom: 6pt !important;
+    padding: 8pt 10pt !important; margin-bottom: 5pt !important;
     background: #F5F5F3 !important; border: 0.5pt solid #ddd !important;
-    border-radius: 6pt !important;
+    border-radius: 5pt !important;
   }
-  .cost-num { background: #111 !important; color: #FFE600 !important; width: 22pt !important; height: 22pt !important; font-size: 9pt !important; }
-  .cost-name { font-size: 10pt !important; }
-  .cost-desc { font-size: 8pt !important; }
-  .cost-val { font-size: 11pt !important; }
-  .total-box { background: #111 !important; border-radius: 8pt !important; padding: 14pt !important; }
-  .total-label { color: rgba(255,255,255,.5) !important; font-size: 9pt !important; }
-  .total-val { font-size: 20pt !important; color: #FFE600 !important; }
-  .total-note { color: rgba(255,255,255,.4) !important; font-size: 8pt !important; }
+  .cost-num { background: #111 !important; color: #FFE600 !important; width: 20pt !important; height: 20pt !important; font-size: 8pt !important; }
+  .cost-name { font-size: 9.5pt !important; }
+  .cost-desc { font-size: 7.5pt !important; }
+  .cost-val { font-size: 10pt !important; }
+  .total-box { background: #111 !important; border-radius: 7pt !important; padding: 11pt !important; }
+  .total-label { color: rgba(255,255,255,.5) !important; font-size: 8pt !important; }
+  .total-val { font-size: 17pt !important; color: #FFE600 !important; }
+  .total-note { color: rgba(255,255,255,.4) !important; font-size: 7.5pt !important; }
   .saving-panel { position: static !important; top: auto !important; }
-  .compare-summary { border: 0.5pt solid #ddd !important; border-radius: 8pt !important; }
-  .compare-summary-row { padding: 8pt 12pt !important; font-size: 9pt !important; }
-  .saving-hero { background: #111 !important; border-radius: 8pt !important; padding: 14pt !important; }
-  .sh-eyebrow { font-size: 8pt !important; color: rgba(255,255,255,.4) !important; }
-  .sh-vs { gap: 6pt !important; margin-bottom: 10pt !important; }
-  .sh-option { padding: 10pt 8pt !important; }
-  .sh-opt-lbl { font-size: 7.5pt !important; }
-  .sh-opt-price { font-size: 12pt !important; }
-  .sh-opt-sub { font-size: 7pt !important; }
-  .sh-result { padding: 10pt 12pt !important; margin-bottom: 8pt !important; }
-  .sh-result-label { font-size: 8pt !important; }
-  .sh-result-val { font-size: 18pt !important; }
-  .sh-result-desc { font-size: 8pt !important; }
-  .sh-result-badge { font-size: 8pt !important; padding: 4pt 10pt !important; }
-  .sh-pill { padding: 5pt 10pt !important; font-size: 8pt !important; }
+  .compare-summary { border: 0.5pt solid #ddd !important; border-radius: 7pt !important; }
+  .compare-summary-row { padding: 7pt 10pt !important; font-size: 8.5pt !important; }
+  .saving-hero { background: #111 !important; border-radius: 7pt !important; padding: 11pt !important; }
+  .sh-eyebrow { font-size: 7.5pt !important; color: rgba(255,255,255,.4) !important; }
+  .sh-vs { gap: 5pt !important; margin-bottom: 8pt !important; }
+  .sh-option { padding: 8pt 7pt !important; }
+  .sh-opt-lbl { font-size: 7pt !important; }
+  .sh-opt-price { font-size: 11pt !important; }
+  .sh-opt-sub { font-size: 6.5pt !important; }
+  .sh-result { padding: 8pt 10pt !important; margin-bottom: 6pt !important; }
+  .sh-result-label { font-size: 7.5pt !important; }
+  .sh-result-val { font-size: 15pt !important; }
+  .sh-result-desc { font-size: 7.5pt !important; }
+  .sh-result-badge { font-size: 7.5pt !important; padding: 3pt 8pt !important; }
+  .sh-pill { padding: 4pt 8pt !important; font-size: 7.5pt !important; }
 
   /* ── ESG ── */
-  #esg { background: #111 !important; padding: 12mm 0 10mm !important; }
+  #esg { background: #111 !important; padding: 10mm 0 8mm !important; }
   #esg .sec-tag  { color: rgba(255,255,255,.4) !important; }
   #esg .sec-title { color: #fff !important; }
   #esg .sec-desc  { color: rgba(255,255,255,.5) !important; }
-  .esg-grid { grid-template-columns: repeat(3,1fr) !important; gap: 8pt !important; }
-  .esg-card { border: 0.5pt solid rgba(255,255,255,.15) !important; border-radius: 8pt !important; padding: 14pt !important; }
-  .esg-icon { font-size: 20pt !important; }
-  .esg-title { color: #fff !important; font-size: 11pt !important; }
-  .esg-desc { color: rgba(255,255,255,.55) !important; font-size: 8.5pt !important; }
-  .saving-strip { background: rgba(255,230,0,.12) !important; border: 0.5pt solid rgba(255,230,0,.3) !important; border-radius: 8pt !important; padding: 14pt !important; }
-  .saving-num { font-size: 28pt !important; color: #FFE600 !important; }
-  .saving-desc { font-size: 8.5pt !important; color: rgba(255,255,255,.5) !important; }
-  .s-pill { font-size: 8pt !important; padding: 4pt 10pt !important; }
+  .esg-grid { grid-template-columns: repeat(3,1fr) !important; gap: 7pt !important; }
+  .esg-card { border: 0.5pt solid rgba(255,255,255,.15) !important; border-radius: 7pt !important; padding: 11pt !important; }
+  .esg-icon { font-size: 18pt !important; }
+  .esg-title { color: #fff !important; font-size: 10pt !important; }
+  .esg-desc { color: rgba(255,255,255,.55) !important; font-size: 8pt !important; }
+  .saving-strip { background: rgba(255,230,0,.12) !important; border: 0.5pt solid rgba(255,230,0,.3) !important; border-radius: 7pt !important; padding: 11pt !important; }
+  .saving-num { font-size: 24pt !important; color: #FFE600 !important; }
+  .saving-desc { font-size: 8pt !important; color: rgba(255,255,255,.5) !important; }
+  .s-pill { font-size: 7.5pt !important; padding: 3pt 8pt !important; }
 
   /* ── 확인 사항 ── */
-  #action { background: #F5F5F3 !important; padding: 12mm 0 10mm !important; }
-  .action-item { padding: 10pt 12pt !important; background: #fff !important; border: 0.5pt solid #ddd !important; border-radius: 6pt !important; }
-  .action-num { background: #111 !important; color: #FFE600 !important; width: 22pt !important; height: 22pt !important; font-size: 9pt !important; }
-  .action-body { font-size: 9.5pt !important; }
-  .action-sub { font-size: 8pt !important; }
+  #action { background: #F5F5F3 !important; padding: 10mm 0 8mm !important; }
+  .action-item { padding: 8pt 10pt !important; background: #fff !important; border: 0.5pt solid #ddd !important; border-radius: 5pt !important; }
+  .action-num { background: #111 !important; color: #FFE600 !important; width: 20pt !important; height: 20pt !important; font-size: 8pt !important; }
+  .action-body { font-size: 9pt !important; }
+  .action-sub { font-size: 7.5pt !important; }
 
   /* ── 섹션 제목 공통 ── */
-  .sec-tag   { font-size: 8pt !important; margin-bottom: 4pt !important; }
-  .sec-title { font-size: 16pt !important; margin-bottom: 6pt !important; }
-  .sec-desc  { font-size: 9pt !important; margin-bottom: 8mm !important; }
+  .sec-tag   { font-size: 7.5pt !important; margin-bottom: 3pt !important; }
+  .sec-title { font-size: 14pt !important; margin-bottom: 5pt !important; }
+  .sec-desc  { font-size: 8.5pt !important; margin-bottom: 6mm !important; }
 }
 </style>
 </head>
