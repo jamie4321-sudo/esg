@@ -511,16 +511,24 @@ footer { background:var(--black); padding:40px 80px; display:flex; align-items:c
   }
 
   @page {
-    size: A4 landscape;
+    size: 297mm 210mm;
     margin: 10mm 14mm 12mm 14mm;
   }
 
-  html, body {
+  html {
     width: 297mm;
+  }
+
+  body {
+    width: 269mm;
+    min-width: 269mm;
+    max-width: 269mm;
+    margin: 0 auto;
     font-size: 10.5pt;
     line-height: 1.5;
     background: #fff !important;
     color: #111 !important;
+    overflow: visible !important;
   }
 
   /* ── 숨길 요소 ── */
@@ -1067,21 +1075,36 @@ document.querySelectorAll(
 
 /* ── PDF 인쇄 함수 ── */
 function printToPDF() {
-  // 인쇄 전: 모든 애니메이션 요소 강제 visible 처리
+  // 모든 애니메이션 요소 강제 visible
   document.querySelectorAll(
     '.spot-card,.metric,.compare-card,.detail-card,.cost-item,.total-box,.esg-card,.action-item,.saving-panel'
   ).forEach(el => el.classList.add('visible'));
 
-  // 라이트 모드 강제 (다크모드 시 인쇄 색상 안정화)
+  // 라이트 모드 강제
   const currentTheme = html.getAttribute('data-theme');
   html.setAttribute('data-theme', 'light');
 
-  // 인쇄 실행
+  // ★ 가로형 강제: 인쇄 전 body 너비를 가로 A4 기준으로 고정
+  const style = document.createElement('style');
+  style.id = '__print_landscape_force__';
+  style.textContent = `
+    @media print {
+      @page { size: 297mm 210mm; margin: 10mm 14mm 12mm 14mm; }
+      html  { width: 297mm !important; }
+      body  { width: 269mm !important; min-width: 269mm !important; max-width: 269mm !important; transform: none !important; }
+    }
+  `;
+  document.head.appendChild(style);
+
   setTimeout(() => {
     window.print();
-    // 인쇄 후 원래 테마 복원
-    setTimeout(() => html.setAttribute('data-theme', currentTheme), 500);
-  }, 150);
+    // 인쇄 후 원래 테마·스타일 복원
+    setTimeout(() => {
+      html.setAttribute('data-theme', currentTheme);
+      const s = document.getElementById('__print_landscape_force__');
+      if (s) s.remove();
+    }, 800);
+  }, 200);
 }
 </script>
 </body>
